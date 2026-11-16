@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#06070e">
+  <title>El Adefesio de Oro</title>
+  <link rel="icon" href="/trofeo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="/trofeo.png">
+  <link rel="stylesheet" href="/css/vapp.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="admin">
+  <div id="blackout"></div>
+  <div id="viewport">
+    <div id="stage">
+
+      <!-- Pantalla inicial -->
+      <section class="view" id="v-splash">
+        <div class="rays"></div>
+        <div class="splash-trophy"><img src="/trofeo.png" alt="Trofeo El Adefesio de Oro"></div>
+        <h1 class="splash-title gold-text shine">El Adefesio de Oro</h1>
+        <p class="splash-sub">Familia Hernández Pose <b>·</b> Premio al peor regalo</p>
+        <button class="btn" data-action="go-setup">Iniciar</button>
+      </section>
+
+      <!-- Carga de participantes -->
+      <section class="view" id="v-setup">
+        <div class="setup-head">
+          <img src="/trofeo.png" alt="">
+          <div>
+            <div class="setup-kicker">El Adefesio de Oro</div>
+            <h2 class="setup-title">¿Quiénes participan?</h2>
+          </div>
+        </div>
+        <form class="setup-input-row" id="add-form" autocomplete="off">
+          <input class="setup-input" id="name-input" maxlength="40" placeholder="Escribí un nombre..." autocomplete="off" spellcheck="false">
+          <button class="btn btn--small" type="submit" title="Agregar" data-icon="arrowRight">Agregar</button>
+        </form>
+        <div class="setup-hint" id="setup-hint">Escribí un nombre y apretá <kbd>Enter</kbd>. Repetí con cada persona.</div>
+        <div class="chips" id="chips"></div>
+        <div class="setup-foot">
+          <div class="setup-count" id="setup-count"></div>
+          <div class="demo-links">
+            <button class="btn btn--quiet" data-action="demo" data-icon="flask">Demo</button>
+            <button class="btn btn--quiet" data-action="demo-tie" data-icon="scale">Demo con empate</button>
+          </div>
+          <button class="btn btn--quiet" data-action="clear-names" data-icon="x">Borrar todos</button>
+          <button class="btn" id="btn-start" data-action="start" data-icon="play">Iniciar votación</button>
+        </div>
+      </section>
+
+      <!-- Presentacion -->
+      <section class="view" id="v-present">
+        <header class="p-head">
+          <h1 class="p-title gold-text shine">El Adefesio de Oro</h1>
+          <p class="p-sub">Familia Hernández Pose · <span class="p-live" id="p-status">Votación en curso</span></p>
+        </header>
+        <div class="p-main">
+          <div class="p-left">
+            <div class="p-grid" id="grid"></div>
+            <div class="p-progress">
+              <div class="p-count"><b id="cnt-voted">0</b> / <span id="cnt-total">0</span><small>votaron</small></div>
+              <div class="p-bar" id="bar"><div class="p-bar-fill" id="bar-fill"></div></div>
+            </div>
+            <div class="p-qr">
+              <div class="qr-box" id="qr"></div>
+              <div>
+                <div class="qr-title">Escaneá para votar</div>
+                <div class="qr-url">o entrá a <b id="url">...</b></div>
+                <div class="qr-wifi">Conectate al WiFi de la casa</div>
+              </div>
+            </div>
+          </div>
+          <div class="p-right" id="tutorial"></div>
+        </div>
+        <footer class="p-foot">
+          <div class="p-steps">
+            <div class="p-step"><i>1</i>Escaneá el QR</div>
+            <span class="p-dot"></span>
+            <div class="p-step"><i>2</i>Elegí quién sos</div>
+            <span class="p-dot"></span>
+            <div class="p-step"><i>3</i>Votá a otro <small>(no a vos mismo)</small></div>
+          </div>
+          <div class="p-allvoted">
+            <div class="p-allvoted-text">¡Votaron todos!</div>
+            <button class="btn btn-reveal" data-action="reveal">Revelar ganador</button>
+          </div>
+          <button class="btn btn--quiet p-close" data-action="close-voting">Cerrar votación y revelar</button>
+        </footer>
+      </section>
+
+      <!-- Revelacion -->
+      <section class="view" id="v-reveal">
+        <div class="r-group">
+          <div class="r-stage">
+            <div class="r-rays" id="r-rays"><div class="r-rays-spin"></div><div class="r-rays-spin rev"></div></div>
+            <div class="r-spot" id="r-spot"></div>
+            <div class="r-pool" id="r-pool"></div>
+            <div class="r-trophy" id="r-trophy">
+              <div class="r-trophy-inner">
+                <img src="/trofeo.png" alt="Trofeo El Adefesio de Oro">
+                <div class="r-shine" id="r-shine"></div>
+              </div>
+            </div>
+          </div>
+          <div class="r-winner">
+            <div class="r-kicker" id="r-kicker"></div>
+            <div class="r-name" id="r-name"></div>
+            <div class="r-votes" id="r-votes"></div>
+          </div>
+        </div>
+        <div class="r-drama" id="r-drama"></div>
+        <div class="r-rank" id="r-rank"></div>
+        <div class="r-final">
+          <div class="r-final-title">Resultados</div>
+          <div class="r-table" id="r-table"></div>
+          <div class="r-actions">
+            <button class="btn btn-tie" data-action="tiebreak" data-icon="scale">Desempate</button>
+            <button class="btn btn--quiet" data-action="replay" data-icon="replay">Ver de nuevo la animación</button>
+            <button class="btn btn--quiet" data-action="new-vote" data-icon="reset">Nueva votación</button>
+          </div>
+        </div>
+        <div class="r-flash" id="r-flash"></div>
+        <button class="btn btn--quiet r-skip" data-action="skip">Saltar animación</button>
+      </section>
+
+      <div class="corner">
+        <button class="icon-btn" data-keep data-action="mute" id="btn-mute" title="Sonido"></button>
+        <button class="icon-btn" data-action="fullscreen" data-icon="maximize" title="Pantalla completa"></button>
+        <button class="icon-btn" data-action="reset" data-icon="reset" title="Reiniciar todo"></button>
+      </div>
+      <button class="audio-hint" data-action="unlock-audio" data-icon="volume">Hacé clic para activar el sonido</button>
+
+      <div class="modal" id="modal">
+        <div class="modal-card">
+          <h3 class="modal-title" id="modal-title"></h3>
+          <p class="modal-text" id="modal-text"></p>
+          <div class="modal-actions">
+            <button class="btn btn--ghost" data-action="modal-cancel">Cancelar</button>
+            <button class="btn" data-action="modal-ok" id="modal-ok">Confirmar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/icons.js"></script>
+  <script src="/js/vapp.js"></script>
+  <script src="/js/audio.js"></script>
+  <script src="/js/fx.js"></script>
+  <script src="/js/tutorial.js"></script>
+  <script src="/js/reveal.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

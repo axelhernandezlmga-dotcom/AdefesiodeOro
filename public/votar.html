@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#0c1124">
+  <title>Votar · El Adefesio de Oro</title>
+  <link rel="icon" href="/trofeo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/vapp.css">
+  <style>
+    html, body { margin: 0; height: 100%; background: #07070d; overscroll-behavior: none; }
+    #app { position: fixed; inset: 0; height: 100dvh; }
+    #app .vscreen { padding-top: calc(26px + env(safe-area-inset-top, 0px)); }
+    .vconn {
+      position: absolute; right: 12px; top: calc(10px + env(safe-area-inset-top, 0px)); z-index: 20;
+      padding: 6px 12px; border-radius: 999px; background: #3a1414; color: #fff;
+      font: 600 14px var(--font-body); opacity: 0; transition: opacity .3s; pointer-events: none;
+    }
+    .vconn.is-on { opacity: 1; }
+    @media (prefers-reduced-motion: reduce) {
+      body.voter *, body.voter *::before, body.voter *::after {
+        animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      body.voter .vconfetti { display: none; }
+    }
+  </style>
+</head>
+<body class="voter">
+  <div id="app" class="vapp"></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/icons.js"></script>
+  <script src="/js/vapp.js"></script>
+  <script src="/js/votar.js"></script>
+</body>
+</html>

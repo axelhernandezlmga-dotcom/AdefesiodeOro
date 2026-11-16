@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>El Adefesio de Oro</title>
+  <meta name="theme-color" content="#07070d">
+  <style>html,body{margin:0;height:100%;background:#07070d}</style>
+  <script>
+    (function () {
+      var ua = navigator.userAgent || '';
+      var mobileUA = /Android|iPhone|iPad|iPod|Mobile|Opera Mini|IEMobile|webOS|BlackBerry/i.test(ua);
+      var touch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+      var narrow = Math.min(window.innerWidth, screen.width) < 768;
+      var isPhone = mobileUA || (narrow && touch);
+      location.replace((isPhone ? '/votar' : '/admin') + location.search);
+    })();
+  </script>
+</head>
+<body></body>
+</html>
