@@ -127,15 +127,22 @@ const io = new Server(server);
 
 app.get('/admin', (_req, res) => res.sendFile(path.join(PUBLIC, 'admin.html')));
 app.get('/votar', (_req, res) => res.sendFile(path.join(PUBLIC, 'votar.html')));
-app.get('/api/info', async (_req, res) => {
-  const voteUrl = BASE_URL + '/votar';
+app.get('/health', (_req, res) => res.status(200).send('ok'));
+app.get('/api/info', async (req, res) => {
+  // La URL pública la manda el navegador (window.location.origin); si no viene, se usa la IP local.
+  let base = BASE_URL;
+  try {
+    const u = new URL(String(req.query.origin || ''));
+    if (u.protocol === 'http:' || u.protocol === 'https:') base = u.origin;
+  } catch (_) {}
+  const voteUrl = base + '/votar';
   const qrSvg = await QRCode.toString(voteUrl, {
     type: 'svg',
     margin: 0,
     errorCorrectionLevel: 'M',
     color: { dark: '#0b0b12', light: '#00000000' },
   });
-  res.json({ url: BASE_URL, displayUrl: BASE_URL.replace(/^http:\/\//, ''), voteUrl, qrSvg });
+  res.json({ url: base, displayUrl: base.replace(/^https?:\/\//, ''), voteUrl, qrSvg });
 });
 app.use(express.static(PUBLIC, { extensions: ['html'] }));
 

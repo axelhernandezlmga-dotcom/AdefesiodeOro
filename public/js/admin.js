@@ -296,7 +296,7 @@
   socket.on('state', onState);
 
   // URL y QR
-  fetch('/api/info')
+  fetch('/api/info?origin=' + encodeURIComponent(window.location.origin))
     .then((r) => r.json())
     .then((info) => {
       $('qr').innerHTML = info.qrSvg;
